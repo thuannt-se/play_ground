@@ -4,7 +4,7 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 
-//to simplify the implementation, I only consider list with number (int)
+//to simplify the implementation, I only consider array with number (int)
 public class MergeSort {
 	
 	static class TopDownMergeSort {
