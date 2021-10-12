@@ -1,5 +1,7 @@
 package com.thuannt.algorithm.sort;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 
 //to simplify the implementation, I only consider list with number (int)
@@ -69,14 +71,22 @@ public class MergeSort {
 	}
 	
 	public static void main(String[] args) {
-		int[] test1 = {1, 5, 3, 20, 9, 10, 100, 20, 2, 4};
+		int[] test1 = { 1, 5, 3, 20, 9, 10, 100, 20, 2, 4 };
+		LocalDateTime start1 = LocalDateTime.now();
 		TopDownMergeSort.sort(test1);
+		LocalDateTime end1 = LocalDateTime.now();
+		System.out.println(Duration.between(start1, end1).toNanos());
 		System.out.println(Arrays.toString(test1));
-		int[] test2 = {12, 5, 3, 4, 9, 10, 100, 20, 2, 27, 90 , 33};
-		//Bottom up
-		BottomUpMergeSort.sort(test2);
-		System.out.println(Arrays.toString(test2));
+		int[] test2 = { 12, 5, 3, 4, 9, 10, 100, 20, 2, 27, 90, 33 };
+		// Bottom up
+		LocalDateTime start2 = LocalDateTime.now();
 
+		BottomUpMergeSort.sort(test2);
+		LocalDateTime end2 = LocalDateTime.now();
+		
+		System.out.println(Duration.between(start2, end2).toNanos());
+
+		System.out.println(Arrays.toString(test2));
 	}
 	
 }
