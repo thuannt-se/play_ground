@@ -28,8 +28,7 @@ public class MergeSort {
 			merge(x, y, output);
 		}
 	}
-	//This code is copied from DSA book of Wiley
-	//It has a bug: cannot sort array list with odd length
+	
 	static class BottomUpMergeSort {
 		
 		private static void merge(int[] src, int[] dest, int start, int inc) {
@@ -48,6 +47,8 @@ public class MergeSort {
 			else if(y < end2) 
 				System.arraycopy(src, y, dest, z, end2 - y);
 			}
+			if(src.length % 2 != 0 && y < end2) 
+				System.arraycopy(src, end2, dest, end2, end2 - y);
 		}
 		
 		public static void sort(int[] output) {
@@ -71,7 +72,7 @@ public class MergeSort {
 		int[] test1 = {1, 5, 3, 20, 9, 10, 100, 20, 2, 4};
 		TopDownMergeSort.sort(test1);
 		System.out.println(Arrays.toString(test1));
-		int[] test2 = {1, 5, 3};
+		int[] test2 = {12, 5, 3, 4, 9, 10, 100, 20, 2, 27, 90 , 33};
 		//Bottom up
 		BottomUpMergeSort.sort(test2);
 		System.out.println(Arrays.toString(test2));
