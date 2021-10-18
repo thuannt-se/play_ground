@@ -4,7 +4,6 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
 
@@ -12,7 +11,7 @@ public class QuickSort {
 	
 	//For quicksort case, it would be easier if we use Java collection instead of array of int
 	//Since array of int require us to copy array, handle case array with 0 value, or empty array, etc...
-	static class BasicImplemation {
+	public static class BasicImplemation {
 		public static <T> List<T> sort(List<T> src, Comparator<T> comparator) {
 			int maxLength = src.size();
 
@@ -48,12 +47,34 @@ public class QuickSort {
 			
 		}
 	}
-	public static void main(String[] args) {
-		Integer[] test1 = { 29, 5, 3, 20, 9, 10, 100, 20, 2, 4 };
-		LocalDateTime start1 = LocalDateTime.now();
-		List<Integer> result = BasicImplemation.sort(Arrays.asList(test1), (a1, a2) -> a1.compareTo(a2));
-		LocalDateTime end1 = LocalDateTime.now();
-		System.out.println(Duration.between(start1, end1).toNanos());
-		System.out.println(Arrays.toString(result.toArray()));
+	
+	public static class InPlaceImplementation {
+		public static <T> void sort(T[] src, Comparator<T> comparator, int firstIdx, int lastIdx) {
+			if(firstIdx > lastIdx) return ;
+			int left = firstIdx;
+			T pivot = src[lastIdx];
+			int right = lastIdx - 1;
+			T tmp;
+			while (left <= right) {
+				while (left <= right && comparator.compare(src[left], pivot) < 0) left++;
+				while (left <= right && comparator.compare(src[right], pivot) > 0) right--;
+				
+				if(left <= right) {
+					tmp = src[left];
+					src[left] = src[right];
+					src[right] = tmp;
+					left++;
+				}
+			}
+			// move the pivot into the current middle position
+			tmp = src[left];
+			src[left] = src[lastIdx]; 
+			src[lastIdx] = tmp;
+			
+			//recursive call with updated index;
+			sort(src, comparator, firstIdx, left - 1);
+			sort(src, comparator, left + 1, lastIdx);
+			
+		}
 	}
 }

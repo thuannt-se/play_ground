@@ -7,7 +7,7 @@ import java.util.Arrays;
 //to simplify the implementation, I only consider array with number (int)
 public class MergeSort {
 	
-	static class TopDownMergeSort {
+	public static class TopDownMergeSort {
 		private static void merge(int[] x, int[] y , int[] output) {
 			int i = 0, j = 0;
 			while(i + j < output.length) {
@@ -31,7 +31,7 @@ public class MergeSort {
 		}
 	}
 	
-	static class BottomUpMergeSort {
+	public static class BottomUpMergeSort {
 		
 		private static void merge(int[] src, int[] dest, int start, int inc) {
 			int end1 = Math.min(start + inc, src.length);
