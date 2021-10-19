@@ -9,6 +9,8 @@ import com.thuannt.algorithm.sort.BubbleSort;
 import com.thuannt.algorithm.sort.InsertionSort;
 import com.thuannt.algorithm.sort.QuickSort;
 import com.thuannt.algorithm.sort.SelectionSort;
+import com.thuannt.datastructure.collections.ArrayStack;
+import com.thuannt.datastructure.collections.Stack;
 
 public class Main {
 
@@ -45,6 +47,13 @@ public class Main {
         int[] test4 = { 29, 5, 3, 20, 9, 10, 100, 20, 2, 4 };
         BubbleSort.sort(test4);
         System.out.println(Arrays.toString(test4));
+        
+        //Test Stack;
+        Stack<Integer> stack = new ArrayStack<Integer>();
+        stack.push(5);
+        stack.push(20);
+        stack.push(1);
+        System.out.println(stack.toString());
 
     }
 }
