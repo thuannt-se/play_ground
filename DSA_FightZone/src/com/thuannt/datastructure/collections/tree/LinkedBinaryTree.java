@@ -64,10 +64,16 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
 
     public LinkedBinaryTree() { }
 
+    /** If node parent is itself, we see it as already removed from tree and does not allowed to add it again
+     * @param p
+     * @return  Passed validation Node
+     * @throws IllegalArgumentException
+     */
     protected Node<E> validate(Position<E> p) throws IllegalArgumentException {
         if(!(p instanceof Node))
             throw new IllegalArgumentException("Invalid position");
         Node<E> node = (Node<E>) p;
+        if(node.getParent() == node) throw new IllegalArgumentException("node was removed");
         return node;
     }
     
@@ -185,7 +191,7 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
         node.setElement(null);
         node.setLeft(null);
         node.setRight(null);
-        
+        node.setParent(node);
         return tmp;
     }
 
