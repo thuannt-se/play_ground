@@ -252,59 +252,80 @@ public class ArrayAndString {
             System.arraycopy(holder, 0, result, 0, count);
             return result;
         }
-    }
-    // some best solution from leetcode
-    public int[] intersect(int[] nums1, int[] nums2) {
-        int[] hash = new int[1001];
-        ArrayList<Integer> arr = new ArrayList<Integer>();
-        for(int i=0;i<nums1.length;i++){
-            hash[nums1[i]]++;
-        }
-        for(int i=0;i<nums2.length;i++){
-            if(hash[nums2[i]]>0){
-                arr.add(nums2[i]);
-                hash[nums2[i]]--;
+        public static int[] intersectBest(int[] nums1, int[] nums2) {
+            int[] hash = new int[1001];
+            ArrayList<Integer> arr = new ArrayList<Integer>();
+            for(int i=0;i<nums1.length;i++){
+                hash[nums1[i]]++; // clever way to count the value without using map
             }
-        }
-        int[]ans = new int[arr.size()];
-        for(int i=0;i<ans.length;i++){
-            ans[i] = arr.get(i);
-        }
-        return ans;
-    }
-    //solution using map
-    public int[] intersectWithMap(int[] nums1, int[] nums2) {
-        HashMap<Integer,Integer> map = new HashMap();
-        // tally nums1 freq
-        for(int i : nums1) {
-            map.put(i, map.getOrDefault(i,0) + 1);
-        }
-        
-        // decrement from nums1 freq and build solution
-        ArrayList<Integer> res = new ArrayList<Integer>();
-        for(int i : nums2) {
-            if(map.containsKey(i) && map.get(i) > 0) {
-                res.add(i);
-                map.put(i, map.get(i) - 1);
+            for(int i=0;i<nums2.length;i++){
+                if(hash[nums2[i]]>0){
+                    arr.add(nums2[i]);
+                    hash[nums2[i]]--;
+                }
             }
+            int[]ans = new int[arr.size()];
+            for(int i=0;i<ans.length;i++){
+                ans[i] = arr.get(i);
+            }
+            return ans;
         }
-        int[] sol = new int[res.size()];
-        int j = 0;
-        for(int i : res) {
-            sol[j] = i;
-            j++;
+        //solution using map
+        public int[] intersectWithMap(int[] nums1, int[] nums2) {
+            HashMap<Integer,Integer> map = new HashMap();
+            // tally nums1 freq
+            for(int i : nums1) {
+                map.put(i, map.getOrDefault(i,0) + 1);
+            }
+            
+            // decrement from nums1 freq and build solution
+            ArrayList<Integer> res = new ArrayList<Integer>();
+            for(int i : nums2) {
+                if(map.containsKey(i) && map.get(i) > 0) {
+                    res.add(i);
+                    map.put(i, map.get(i) - 1);
+                }
+            }
+            int[] sol = new int[res.size()];
+            int j = 0;
+            for(int i : res) {
+                sol[j] = i;
+                j++;
+            }
+            return sol;
         }
-        return sol;
     }
     
+    protected static class PlusOne {
+        
+        private int [] plusAndShift(int[] digits, int index) {
+            int sum = digits[index] + 1;
+            if(sum > 9) {
+                if(index != 0) {
+                    digits[index] = 0;
+                    return plusAndShift(digits, index - 1);
+                } else {
+                    digits[index] = 0;
+                    int[] result = new int[digits.length +1];
+                    result[0] = 1;
+                    System.arraycopy(digits, 0, result, 1, digits.length);
+                    return result;
+                }
+            } else {
+                digits[index] = sum;
+            }
+            return digits;
+            
+        }
+        
+        public int[] plusOne(int[] digits) {
+            return plusAndShift(digits, digits.length - 1);
+        }
+    }
     public static void main(String[] args) {
-        int[] nums1 = { 61, 24, 20, 58, 95, 53, 17, 32, 45, 85, 70, 20, 83, 62, 35, 89, 5, 95, 12, 86, 58, 77, 30, 64,
-                46, 13, 5, 92, 67, 40, 20, 38, 31, 18, 89, 85, 7, 30, 67, 34, 62, 35, 47, 98, 3, 41, 53, 26, 66, 40, 54,
-                44, 57, 46, 70, 60, 4, 63, 82, 42, 65, 59, 17, 98, 29, 72, 1, 96, 82, 66, 98, 6, 92, 31, 43, 81, 88, 60,
-                10, 55, 66, 82, 0, 79, 11, 81 };
-        int[] nums2 = { 5, 25, 4, 39, 57, 49, 93, 79, 7, 8, 49, 89, 2, 7, 73, 88, 45, 15, 34, 92, 84, 38, 85, 34, 16, 6,
-                99, 0, 2, 36, 68, 52, 73, 50, 77, 44, 61, 48 };
-        System.out.println(Arrays.toString(IntersectionTwoArrays.intersect(nums1, nums2)));
+        int[] nums1 = {9, 9};
+        PlusOne one = new PlusOne();
+        System.out.println(Arrays.toString(one.plusOne(nums1)));
     }
     
 }

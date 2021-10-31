@@ -1,7 +1,5 @@
 package com.thuannt.datastructure.collections.tree;
 
-import com.thuannt.datastructure.collections.Position;
-
 public abstract class AbstractTree<E> implements Tree<E> {
     
     public boolean isInternal(Position<E> p) {

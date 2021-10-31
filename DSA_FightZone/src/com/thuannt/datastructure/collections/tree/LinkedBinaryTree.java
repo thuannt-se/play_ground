@@ -1,8 +1,10 @@
 package com.thuannt.datastructure.collections.tree;
 
+import java.util.ArrayList;
 import java.util.Iterator;
-
-import com.thuannt.datastructure.collections.Position;
+import java.util.List;
+import java.util.Queue;
+import java.util.concurrent.ConcurrentLinkedDeque;
 
 public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
     
@@ -194,6 +196,55 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
         node.setParent(node);
         return tmp;
     }
+   
+    private void preorderSubstree(Position<E> p, List<Position<E>> snapshot) {
+        snapshot.add(p);
+        for(Position<E> child : children(p)) {
+            preorderSubstree(p, snapshot);
+        }
+    }
+    
+    /**
+     * @return iterable collection of position using preorder
+     */
+    private Iterable<Position<E>> preorder() {
+        List<Position<E>> snapshot = new ArrayList<Position<E>>();
+        if(!isEmpty()) {
+            preorderSubstree(root(), snapshot);
+        }
+        return snapshot;
+    }
+    
+    private void postorderSubTree(Position<E> p, List<Position<E>> snapshot) {
+        for(Position<E> child : children(p)) {
+            postorderSubTree(child, snapshot);
+        }
+        snapshot.add(p);
+    }
+    
+    private Iterable<Position<E>> postorder() {
+        List<Position<E>> snapshot = new ArrayList<Position<E>>();
+        if(!isEmpty()) {
+            postorderSubTree(root(), snapshot);
+        }
+        return snapshot;
+    }
+    
+    public Iterable<Position<E>> breadfirst() {
+        List<Position<E>> snapshot = new ArrayList<Position<E>>();
+        if(!isEmpty()) {
+            Queue<Position<E>> fringe = new ConcurrentLinkedDeque<Position<E>>();
+            fringe.add(root());
+            while(!fringe.isEmpty()) {
+                Position<E> p = fringe.poll();
+                snapshot.add(p);
+                for(Position<E> c : children(p)) {
+                    fringe.add(c);
+                }
+            }
+        }
+        return snapshot;
+    }
 
     @Override
     public Iterator<E> iterator() {
@@ -203,8 +254,7 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
 
     @Override
     public Iterable<Position<E>> positions() {
-        // TODO Auto-generated method stub
-        return null;
+        return preorder();
     }
     
 

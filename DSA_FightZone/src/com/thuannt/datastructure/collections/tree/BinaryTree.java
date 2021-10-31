@@ -1,7 +1,5 @@
 package com.thuannt.datastructure.collections.tree;
 
-import com.thuannt.datastructure.collections.Position;
-
 public interface BinaryTree<E> extends Tree<E> {
     
     /**

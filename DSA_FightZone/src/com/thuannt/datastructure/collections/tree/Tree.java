@@ -2,8 +2,6 @@ package com.thuannt.datastructure.collections.tree;
 
 import java.util.Iterator;
 
-import com.thuannt.datastructure.collections.Position;
-
 public interface Tree<E> extends Iterable<E> {
     
     /**

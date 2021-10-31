@@ -1,9 +1,8 @@
 package com.thuannt.datastructure.collections.tree;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
-
-import com.thuannt.datastructure.collections.Position;
 
 public abstract class AbstractBinaryTree<E> extends AbstractTree<E> implements BinaryTree<E>{
 
@@ -29,5 +28,26 @@ public abstract class AbstractBinaryTree<E> extends AbstractTree<E> implements B
         if(left(p) != null) snapshot.add(p);
         if(right(p) != null) snapshot.add(p);
         return snapshot;
+    }
+    
+    private class ElementIterator implements Iterator<E> {
+        Iterator<Position<E>> posIterator = positions().iterator();
+
+        @Override
+        public boolean hasNext() {
+            return posIterator.hasNext();
+        }
+        
+        @Override
+        public E next() {
+            return posIterator.next().getElement();
+        }
+        
+        public void remove() { posIterator.remove(); }
+        
+    }
+    
+    public Iterator<E> iterator() {
+        return new ElementIterator();
     }
 }

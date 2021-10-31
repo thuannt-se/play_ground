@@ -1,4 +1,4 @@
-package com.thuannt.datastructure.collections;
+package com.thuannt.datastructure.collections.tree;
 
 public interface Position<E> {
     
