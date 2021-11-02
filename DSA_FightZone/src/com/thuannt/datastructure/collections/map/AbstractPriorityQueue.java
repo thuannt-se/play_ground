@@ -50,7 +50,7 @@ public abstract class AbstractPriorityQueue<K, V> implements PriorityQueue<K, V>
         try {
             return this.comp.compare(key, key) == 0; // check if it compare to itself
         } catch (ClassCastException e) {
-            throw new IllegalArgumentException("Incompatible key");
+            throw new IllegalArgumentException("Incompitable key");
         }
     }
     

@@ -1,17 +1,15 @@
 package com.thuannt.main;
 
-import java.time.Duration;
-import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 
 import com.thuannt.algorithm.sort.BubbleSort;
+import com.thuannt.algorithm.sort.HeapSort;
 import com.thuannt.algorithm.sort.InsertionSort;
 import com.thuannt.algorithm.sort.QuickSort;
 import com.thuannt.algorithm.sort.SelectionSort;
 import com.thuannt.datastructure.collections.ArrayStack;
 import com.thuannt.datastructure.collections.Stack;
-import com.thuannt.play.objects.PlayWithJava;
 
 public class Main {
 
@@ -56,5 +54,9 @@ public class Main {
         stack.push(1);
         System.out.println(stack.toString());
         
+        Integer[] testHeapSort = { 29, 9, 10, 100, 1000, 20, 4, 1 , 3, 3000};
+
+        //Heap sort
+        System.out.println(Arrays.toString(HeapSort.sort(Arrays.asList(testHeapSort)).toArray()));
     }
 }
